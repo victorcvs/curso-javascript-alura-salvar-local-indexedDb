@@ -22,4 +22,8 @@ class Negociacao {
     get valor() {
         return this._valor;
     }
+
+    isEqual(outraNegociacao) {
+        return JSON.stringify(this) == JSON.stringify(outraNegociacao); //transforma em JSON pra comparar objetos
+    }
 }

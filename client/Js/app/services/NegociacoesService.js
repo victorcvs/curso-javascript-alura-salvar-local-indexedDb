@@ -3,6 +3,52 @@ class NegociacoesService {
         this._http = new HttpService();
     }
 
+    cadastra(negociacao) {
+        return ConnectionFactory                                    //return pra devolver a promisse
+                .getConnection()                                    //cria e retorna connection
+                .then(connection => new NegociacaoDao(connection))  // cria e retorna dao
+                .then(dao => dao.adiciona(negociacao))              // executa 'adciona'
+                .then(() => 'Negociação incluída com sucesso.')     // devolve mensagem de sucesso
+                .catch(erro => {
+                    console.log(erro)
+                    throw new Error('Erro na inclusão da negociação')});
+    }
+
+    lista() {
+        return ConnectionFactory
+                .getConnection()
+                .then(connection => new NegociacaoDao(connection))
+                .then(dao => dao.listaTodos())   //lista e já retorna
+                .catch(erro => {
+                    console.log(erro)
+                    throw new Error('Erro na listagem das negociações')});
+    }
+
+    apaga() {
+        return  ConnectionFactory
+                .getConnection()
+                .then(connection => new NegociacaoDao(connection))
+                .then(dao => dao.apagaTodos())
+            //  .then(() => 'Negociação apagadas com sucesso.')     // repassa mensagem vinda do dao
+                .catch(erro => {
+                         console.log(erro)
+                        throw new Error('Erro na exclusão das negociações')});
+    }
+
+    importa(listaAtual) {
+        return this.obterNegociacoes()
+        // É preciso filtrar as negociações que já estão na lista. Inclui somente se não existir
+            .then(negociacoes => 
+                    negociacoes.filter(negociacao =>            // filtra a lista conforme uma condição
+                        !listaAtual.some(negociacaoExistente => // 'some' verifica se contém algum (se existir aqui o ! garante o retun false)
+                            negociacao.isEqual(negociacaoExistente)))
+            )   // retorna a lista de negociacoes importadas
+            .catch(erro =>{
+                console.log(erro);
+                throw new Error('Erro na importação das negociações');
+            } )
+    }
+
     obterNegociacoesDaSemana() {
                
         return this._http
