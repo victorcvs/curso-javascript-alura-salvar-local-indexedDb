@@ -1,4 +1,5 @@
-class Bind {
+import {ProxyFactory} from "../services/ProxyFactory.js"
+export class Bind {
 
     constructor(model, view, ...props) {   // rest operator -> transforma os ultimos parâmetros em array
         let proxy = ProxyFactory.create(

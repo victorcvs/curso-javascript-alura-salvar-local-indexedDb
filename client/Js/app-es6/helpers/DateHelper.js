@@ -1,4 +1,4 @@
-class DateHelper {
+export class DateHelper {
 
     // não deve definir o constructor se não tem propriedades
     constructor() {

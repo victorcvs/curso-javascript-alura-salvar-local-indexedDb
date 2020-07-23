@@ -5,7 +5,6 @@
     <title>Negociações</title>
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/bootstrap-theme.css">
-    <script src="js/app/polyfill/es6.js"></script>
     
 </head>
 <body class="container">
@@ -14,7 +13,7 @@
 
     <div id="mensagemView"></div>
     
-    <form class="form" onsubmit="negociacaoController.adiciona(event)">
+    <form class="form">
         
         <div class="form-group">
             <label for="data">Data</label>
@@ -35,10 +34,10 @@
     </form>
     
     <div class="text-center">
-        <button class="btn btn-primary text-center" onclick="negociacaoController.importaNegociacoes()" type="button">
+        <button class="btn btn-primary text-center" id="botaoImportar" type="button">
             Importar Negociações
         </button>
-        <button class="btn btn-primary text-center" type="button" onclick="negociacaoController.apaga()">
+        <button class="btn btn-primary text-center" id="botaoApagar" type="button">
             Apagar
         </button>
     </div> 
@@ -47,25 +46,13 @@
     
     <div id="negociacaoView"></div>
 
-    <script src="Js/app/polyfill/es6.js"></script>
-    <script src="Js/app/polyfill/fetch.js"></script>
-    <script src="js/app/models/Negociacao.js"></script>
-    <script src="js/app/controllers/NegociacaoController.js"></script>
-    <script src="js/helpers/DateHelper.js"></script>
-    <script src="Js/app/models/ListaNegociacoes.js"></script>
-    <script src="Js/app/views/View.js"></script>
-    <script src="Js/app/views/NegociacoesView.js"></script>
-    <script src="Js/app/models/Mensagem.js"></script>
-    <script src="Js/app/views/MensagemView.js"></script>
-    <script src="Js/app/services/ProxyFactory.js"></script>
-    <script src="Js/helpers/Bind.js"></script>
-    <script src="Js/app/services/NegociacoesService.js"></script>
-    <script src="Js/app/services/HttpService.js"></script>
-    <script src="Js/app/services/ConnectionFactory.js"></script>
-    <script src="Js/app/dao/NegociacaoDao.js"></script>
-    <script>
-        let negociacaoController = new NegociacaoController();
+    <script src="node_modules/systemjs/dist/system.js"></script>
 
+    <script>
+        //System.defaultJSExtensions = true;
+        System.import('./js/app/boot.js' ).catch(function(err){
+        console.error(err);
+        });
     </script>
 
 </body>

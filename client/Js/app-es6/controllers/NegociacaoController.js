@@ -1,3 +1,12 @@
+import {ListaNegociacoes} from '../models/ListaNegociacoes.js';
+import {Mensagem} from '../models/Mensagem.js';
+import {NegociacoesView} from '../views/NegociacoesView.js';
+import {MensagemView} from '../views/MensagemView.js';
+import {NegociacoesService} from '../services/NegociacoesService.js';
+import {DateHelper} from '../helpers/DateHelper.js';
+import {Bind} from '../helpers/Bind.js';
+import {Negociacao} from '../models/Negociacao.js';
+
 class NegociacaoController {
     constructor() {
         let $ = document.querySelector.bind(document);
@@ -118,4 +127,12 @@ class NegociacaoController {
         }
         this._ordemAtual = coluna;    
     }
+}
+
+let negociacaoController = new NegociacaoController();
+
+export function currentInstance() {
+
+    return negociacaoController;
+
 }
